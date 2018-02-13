@@ -12,6 +12,7 @@ import { ToastOptions,ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AngularWebStorageModule } from 'angular-web-storage';
 
 import { AccountModule } from './account/account.module';
+import { GraphicsModule } from './graphics/graphics.module';
 import { GoodiesModule } from './goodies/goodies.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
@@ -21,7 +22,7 @@ import { CustomOptions } from './shared/config/toastr-options';
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule,
     AppRoutingModule, AngularWebStorageModule, AccountModule,
-    GoodiesModule, HomeModule, BrowserAnimationsModule,
+    GraphicsModule, GoodiesModule, HomeModule, BrowserAnimationsModule,
     NgbModule.forRoot(), SharedModule.forRoot(), ToastModule.forRoot()],
   declarations: [AppComponent],
   providers: [

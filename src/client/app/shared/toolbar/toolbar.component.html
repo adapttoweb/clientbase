@@ -21,6 +21,12 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/graphics']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" #rl3="routerLinkActive">
+            <span class="dropdown-item {{ rl3.isActive ? 'active' : 'inactive' }}">Graphics
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/account']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}" #rl2="routerLinkActive">
             <span class="dropdown-item {{ rl2.isActive ? 'active' : 'inactive' }}">Account info
             </span>
