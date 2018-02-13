@@ -1,0 +1,39 @@
+:host {
+  border: 0 solid #e1e1e1;
+  border-bottom-width: 1px;
+  display: block;
+  height: 48px;
+  padding: 0 16px;
+  margin-top: 48px;
+}
+
+@media only screen and (max-width : 992px) {
+  :host {
+    border: none;
+  }
+}
+
+nav {
+
+}
+
+nav a {
+  color: #8f8f8f;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 48px;
+  margin-right: 20px;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+nav a.router-link-active {
+  color: #106cc8;
+}
+
+@media only screen and (max-width : 992px) {
+   .desktop-menu {
+        display: none !important;
+    }
+}

@@ -1,0 +1,124 @@
+<div class="container">
+
+<form (ngSubmit)="saveCampaignDetails(campaignForm.value)" #campaignForm="ngForm" (keydown.enter)="$event.preventDefault()">
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="phone-preview text-center">
+        <div class="col center-block phone-content campaign-headline">
+          {{ newHeadline.value }}
+        </div>
+      </div>
+        <div class="remaining">Verfügbare Zeichen:{{ newHeadlineRemaining }}</div>
+        <label class="has-float-label no-margin">
+          <input type="text" class="form-control has-limit" name="newHeadline" #newHeadline="ngModel" placeholder="z.B. 5x €100 Gutschein" width="100%"
+                  required [(ngModel)]="model.newHeadline" [attr.maxlength]="newHeadlineLenght" (keyup)="changedInputnewHeadline()" (paste)="changedInputnewHeadline()" #spy />
+          <span>Kampagnen-Headline</span>
+        </label>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="model.newHeadline.length" aria-valuemin="0" [attr.aria-valuemax]="newHeadlineLenght" [attr.style]="calcCharPercent(newHeadlineLenght,model.newHeadline.length)">
+            <!-- {{newHeadlineRemaining}} -->
+          </div>
+        </div>
+        <p class="text-danger no-margin fadein text-error">
+          <small [hidden]="newHeadline.valid || newHeadline.untouched">Kampagnen-Headline ist ein Pflichtfeld.</small>
+        </p>
+        <div class="clearfix clear format">
+          <p>Format:<br/>Die Kampagnen-Headline beschreibt den zu gewinnenden Hauptpreis und die Anzahl in der es selbigen zu gewinnen gibt.<br/>
+          z.B.: 5x €100 Gutschein; 300x Cheeseburger;<br/>
+                   700x €1 auf Schokoriegel (bei Cashback)
+          </p>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <div class="phone-preview text-center">
+        <div class="col center-block phone-content company-info">
+          <span class="company-name">{{ newUnternehmensName.value }}</span>
+          <span class="company-text">{{ newUnternehmenstext.value }}</span>
+          <span class="company-impressum">{{ newUnternehmensImpr.value }}</span>
+        </div>
+      </div>
+
+      <div class="remaining">Verfügbare Zeichen: {{ newUnternehmensNameRemaining }}</div>
+      <label class="has-float-label no-margin">
+        <input type="text" class="form-control has-limit" name="newUnternehmensName" #newUnternehmensName="ngModel" placeholder="z.B. Burger King" width="100%"
+                required [(ngModel)]="model.newUnternehmensName" [attr.maxlength]="newUnternehmensNameLenght" (keypress)="changednewUnternehmensName()" (paste)="changednewUnternehmensName()" />
+        <span>Name</span>
+      </label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="model.newUnternehmensName.length" aria-valuemin="0" [attr.aria-valuemax]="newUnternehmensNameLenght" [attr.style]="calcCharPercent(newUnternehmensNameLenght,model.newUnternehmensName.length)">
+        </div>
+      </div>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="newUnternehmensName.valid || newUnternehmensName.untouched">Unternehmens/Brand Name ist ein Pflichtfeld.</small>
+      </p>
+      <div class="clearfix clear format">
+        <p>
+        Format:<br />
+        Name des beworbenen Unternehmens/Brands
+        </p>
+      </div>
+
+      <div class="remaining">Verfügbare Zeichen: {{ newUnternehmenstextRemaining }}</div>
+      <label class="has-float-label no-margin">
+        <textarea class="form-control has-limit" name="newUnternehmenstext" #newUnternehmenstext="ngModel" placeholder="Unternehmens Text" rows="5"
+                required [(ngModel)]="model.newUnternehmenstext" [attr.maxlength]="newUnternehmenstextLenght" (keypress)="changednewUnternehmenstext()" (paste)="changednewUnternehmenstext()"></textarea>
+        <span>Unternehmenstext</span>
+      </label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="model.newUnternehmenstext.length" aria-valuemin="0" [attr.aria-valuemax]="newUnternehmenstextLenght" [attr.style]="calcCharPercent(newUnternehmenstextLenght,model.newUnternehmenstext.length)">
+        </div>
+      </div>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="newUnternehmenstext.valid || newUnternehmenstext.untouched">Unternehmenstext ist ein Pflichtfeld.</small>
+      </p>
+
+      <div class="clearfix clear format">
+        <p><strong>Zeilenumbruch: SHIFT+ENTER</strong><br />
+        Format:<br />
+        Allgemeine Informationen zu Ihrem Unternehmen/Brand, Ihren Produkten, etc.<br />Der Unternehmenstext wird sowohl vor dem Rubbeln in der Kampagnen-Detail Ansicht, als auch nach dem Gewinnen im Preis-Detail Screen angezeigt<br />
+        </p>
+      </div>
+
+
+      <div class="remaining">Verfügbare Zeichen: {{ newUnternehmensImprRemaining }}</div>
+      <label class="has-float-label no-margin">
+        <textarea class="form-control has-limit" name="newUnternehmensImpr" #newUnternehmensImpr="ngModel" placeholder="Unternehmens Impressum" rows="5"
+                required [(ngModel)]="model.newUnternehmensImpr" [attr.maxlength]="newUnternehmensImprLenght" (keypress)="changednewUnternehmensImpr()" (paste)="changednewUnternehmensImpr()"></textarea>
+        <span>Impressum</span>
+      </label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="model.newUnternehmensImpr.length" aria-valuemin="0" [attr.aria-valuemax]="newUnternehmensImprLenght" [attr.style]="calcCharPercent(newUnternehmensImprLenght,model.newUnternehmensImpr.length)">
+        </div>
+      </div>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="newUnternehmensImpr.valid || newUnternehmensImpr.untouched">Unternehmens Impressum ist ein Pflichtfeld.</small>
+      </p>
+      <div class="clearfix clear format">
+        <p><strong>Zeilenumbruch: SHIFT+ENTER</strong><br />
+          Format:<br />
+          Das Impressum sollte folgende Informationen beinhalten: Firmenwortlaut, Straße, Hausnummer, Postleitzahl, Stadt, Land, UID
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-buttons col-md-6 offset-md-6 col-xs-12">
+    <!-- todo: add counter reset -->
+    <div class="main-action-buttons">
+      <button type="button" class="btn btn-success btn-green" (click)="saveCampaignDetails(campaignForm.value);goAddGoodies(4000);" [disabled]="!campaignForm.form.valid">Speichern und Weiter</button>
+    </div>
+    <div class="secondary-action-buttons text-right">
+      <!-- campaignForm.reset(); -->
+      <button type="button" class="btn btn-text" (click)="resetCampaignForm();">Zurücksetzen</button>&nbsp;|&nbsp;
+      <button type="button" class="btn btn-text" (click)="saveCampaignDetails(campaignForm.value)" [disabled]="!campaignForm.form.valid">Zwischenspeichern</button>
+    </div>
+    <br />
+    <br />
+  </div>
+</form>
+
+  <!-- <span class="dev invisible">
+    {{d iagnostic }}
+  </span> -->
+</div>

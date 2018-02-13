@@ -1,0 +1,225 @@
+<div class="container">
+  <!-- <div [ngClass]="{'btn-blue': viewportWidth<992}"> -->
+  <div>
+    <nav class="nav nav-pills flex-column flex-sm-row">
+      <ng-container *ngFor="let goodie of goodies; let i=index">
+        <a class="flex-sm-fill text-sm-center nav-link" (click)="askGoodie(i, goodiesForm.form.valid)" [ngClass]="(currentGoodie==i) ? 'active' : 'not-active'" href="javascript:void(0)">{{ goodie.winHeadline ? goodie.winHeadline  : 'Goodie' }}
+        </a>
+      </ng-container>
+        <a class="flex-sm-fill text-sm-center nav-link" (click)="addGoodie(totalGoodies)" href="javascript:void(0)">Add</a>
+    </nav>
+    <div class="spacing-40"></div>
+  </div>
+
+  <div class="row">
+    <!-- Start of first col -->
+    <div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+      <div class="scr_wrapper goodiescreen" >
+        <div class="phone-preview text-center" #phone>
+            <div class="col center-block phone-content">
+              <span class="scr_header"></span>
+              <div id="headLine">{{ model.winHeadline }}</div>
+              <span class="scr_validity"></span>
+              <div id="goodieLegal">{{ model.gLegalText ? model.gLegalCustom : this.gLegalDefault }}</div>
+              <div id="winDescr">{{ model.winBeschreibung }}</div>
+              <span class="scr_redeem"></span>
+              <div id="goodieType">{{ model.gTypeText ? model.gTypeCustom : this.gTypeDefault }}</div>
+              <div class="companyInfo companyName">{{ this.companyName }}</div>
+              <div class="companyInfo companyDescr">{{ this.companyDescr }}</div>
+              <span class="scr_footer"></span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of first col -->
+
+    <!-- Start of second col -->
+    <div class="col-lg-6 col-md-12 formcontent">
+
+      <form (ngSubmit)="saveGoodiesDetails(goodiesForm.value)" #goodiesForm="ngForm" (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+          <div class="">
+            <div class="remaining">Verfügbare Zeichen: {{ winHeadlineRemaining }}</div>
+            <label class="has-float-label no-margin">
+              <input type="text" class="form-control has-limit" name="winHeadline" #winHeadline="ngModel" placeholder="z.B. 5x €100 Gutschein" width="100%"
+                      required [(ngModel)]="model.winHeadline" [attr.maxlength]="winHeadlineLenght" (click)="scrollElement(phone,0)" (keypress)="changedInputwinHeadline()" (paste)="changedInputwinHeadline()" #spy />
+              <span>Gewinn-Headline</span>
+            </label>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="model.winHeadline.length" aria-valuemin="0" [attr.aria-valuemax]="winHeadlineLenght" [attr.style]="calcCharPercent(winHeadlineLenght,model.winHeadline.length)">
+              </div>
+            </div>
+            <p class="text-error no-margin fadein">
+              <small [hidden]="winHeadline.valid || winHeadline.untouched">Goodie Win Headline is a required field.</small>
+            </p>
+
+
+            <div class="clearfix clear format">
+              <p><strong>Zeilenumbruch: SHIFT+ENTER</strong><br />
+              <p class="no-margin">Format:<br />
+                Die Gewinn-Headline beschreibt den gewonnenen Preis und im Falle von Streupreisen die Einlösebedingung (falls vorhanden).<br />
+                z.B.:    €100 Gutschein (Hauptpreis);<br />
+                €20 Gutschein auf Schokolade (Streupreis);<br />
+                €1 Cashback auf Schokoriegel (Streupreis) …
+
+              </p>
+            </div>
+
+
+            <div class="clearfix clear">
+              <div class="remaining">Verfügbare Zeichen: {{ winBeschreibungRemaining }}</div>
+              <label class="has-float-label no-margin">
+                <textarea class="form-control has-limit" name="winBeschreibung" #winBeschreibung="ngModel" placeholder="Gewinn Beschreibung" rows="5"
+                        required [(ngModel)]="model.winBeschreibung" [attr.maxlength]="winBeschreibungLenght" (click)="scrollElement(phone,420)" (keyup)="changedwinBeschreibung()" (paste)="changedwinBeschreibung()"></textarea>
+                <span>Gewinn-Beschreibung</span>
+              </label>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="model.winBeschreibung.length" aria-valuemin="0" [attr.aria-valuemax]="winBeschreibungLenght" [attr.style]="calcCharPercent(winBeschreibungLenght,model.winBeschreibung.length)">
+                </div>
+              </div>
+              <p class="text-error no-margin fadein">
+                <small [hidden]="winBeschreibung.valid || winBeschreibung.untouched">Win description is a required field.</small>
+              </p>
+            <!--<input [attr.maxlength]="winBeschreibungLenght" (keyup)="changedwinBeschreibung()" (paste)="changedwinBeschreibung()"  [(ngModel)]="winBeschreibung" name="winBeschreibung" placeholder="z.B. Gewinn Beschreibung Hier">-->
+
+            </div>
+            <div class="clearfix clear format">
+              <p><strong>Zeilenumbruch: SHIFT+ENTER</strong><br />
+              <p>Der Gewinn-Beschreibungstext wird nach dem Gewinn im Gewinn-Detail Screen angezeigt.<br />
+              Format:<br />
+              Hier wird dem User vermittelt, welchen Preis er gewonnen hat, so wie auf Besonderheiten/Einschränkungen bei der Einlösung hingewiesen.<br />
+              z.B.: Gutschein nur auf eine Produktgruppe einlösbar, Mindestbestellwert
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 col-sm-push-6 dropdown">
+            <span class="select-label">Goody Typ - Enlösung</span><br />
+              <div [hidden]="gType.valid || gType.untouched"
+                   class="alert alert-danger">
+                Pflichtfeld
+              </div>
+              <select [(ngModel)]="model.gType" (ngModelChange)="onChangeGType($event)" (click)="scrollElement(phone,600)" name="gType" #gType="ngModel" class="form-control btn btn-secondary dropdown-toggle" required>
+                <option value="">Select redeem type</option>
+                <ng-container *ngFor="let option of options">
+                  <option *ngIf="!option.isDivider && !option.start" [ngValue]="option.name">{{ option.name }}</option>
+                  <option *ngIf="option.isDivider" disabled>{{ option.name }}</option>
+                </ng-container>
+              </select>
+
+                    <div class="row" *ngIf="model.gType">
+                      <div class="col-6">
+                        <div class="input-group">
+                          <span class="input-group-addon" [class.active]="model.gTypeText==false">
+                            <input [(ngModel)]="model.gTypeText" name="gTypeText" (click)="onChangeGType(model.gType)" type="radio" id="defaultGtypeText" [value]="false" ng-control="gTypeText" [checked]="!model.gTypeText" aria-label="">
+                            <label class="no-margin margin-left-1" for="defaultGtypeText">Standard</label>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="input-group">
+                          <span class="input-group-addon" [class.active]="model.gTypeText==true">
+                            <input [(ngModel)]="model.gTypeText" name="gTypeText" (click)="gTypeToCustom()" type="radio" id="customGtypeText" [value]="true" ng-control="gTypeText" [checked]="model.gTypeText" aria-label="">
+                            <label class="no-margin margin-left-1" for="customGtypeText">Custom</label>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="" ng-if="model.gTypeText">
+                      <div class="form-group" *ngIf="model.gType && !model.gTypeText">
+                        <textarea class="form-control" id="gTypeDefault" rows="3" [disabled]="!model.gTypeText">{{ this.gTypeDefault }}</textarea>
+                      </div>
+                      <div class="form-group" *ngIf="model.gType && model.gTypeText">
+                        <textarea class="form-control has-limit" name="gTypeCustom" #gTypeCustom="ngModel" placeholder="Custom goodie type text" rows="5"
+                                required [(ngModel)]="model.gTypeCustom" [attr.maxlength]="gTypeLenght" (keyup)="changedgTypeCustom()" (paste)="changedgTypeCustom()"></textarea>
+                        <div class="progress" *ngIf="model.gTypeCustom">
+                          <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="model.gTypeCustom.length" aria-valuemin="0" [attr.aria-valuemax]="gTypeLenght" [attr.style]="calcCharPercent(gTypeLenght,model.gTypeCustom.length)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          </div>
+
+          <div class="col-sm-6 col-sm-push-6 dropdown">
+            <span class="select-label">Rechtliches</span><br />
+            <div [hidden]="gLegal.valid || gLegal.untouched"
+                 class="alert alert-danger">
+              Pflichtfeld
+            </div>
+            <select [(ngModel)]="model.gLegal" (ngModelChange)="onChangeGLegal($event)" (click)="scrollElement(phone,80)" name="gLegal" #gLegal="ngModel" class="form-control btn btn-secondary dropdown-toggle" required>
+              <option value="">Select legal</option>
+              <ng-container *ngFor="let option of legaloptions">
+                <option *ngIf="!option.isDivider" [ngValue]="option.name">{{ option.name }}</option>
+                <option *ngIf="option.isDivider" disabled>{{ option.name }}</option>
+              </ng-container>
+            </select>
+
+                  <div class="row" *ngIf="model.gLegal">
+                    <div class="col-6">
+                      <div class="input-group">
+                        <span class="input-group-addon" [class.active]="model.gLegalText==false">
+                          <input [(ngModel)]="model.gLegalText" name="gLegalText" (click)="onChangeGLegal(model.gLegal)" type="radio" id="defaultGlegalText" [value]="false" ng-control="gLegalText" [checked]="!model.gLegalText" aria-label="">
+                          <label class="no-margin margin-left-1" for="defaultGlegalText">Standard</label>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="input-group">
+                        <span class="input-group-addon" [class.active]="model.gLegalText==true">
+                          <input [(ngModel)]="model.gLegalText" name="gLegalText" (click)="gLegalToCustom()" type="radio" id="customGlegalText" [value]="true" ng-control="gLegalText" [checked]="model.gLegalText" aria-label="">
+                          <label class="no-margin margin-left-1" for="customGlegalText">Custom</label>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="" ng-if="model.gLegalText">
+                    <div class="form-group" *ngIf="model.gLegal && !model.gLegalText">
+                      <textarea class="form-control" id="gLegalDefault" rows="3" [disabled]="!model.gLegalText">{{ this.gLegalDefault }}</textarea>
+                    </div>
+                    <div class="form-group" *ngIf="model.gLegal && model.gLegalText">
+                      <textarea class="form-control has-limit" name="gLegalCustom" #gLegalCustom="ngModel" placeholder="Custom goodie legal text" rows="5"
+                            required [(ngModel)]="model.gLegalCustom" [attr.maxlength]="gTypeLenght" (keyup)="changedgLegalCustom()" (paste)="changedgLegalCustom()"></textarea>
+                      <div class="progress" *ngIf="model.gLegalCustom">
+                        <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="model.gLegalCustom.length" aria-valuemin="0" [attr.aria-valuemax]="gLegalLenght" [attr.style]="calcCharPercent(gLegalLenght,model.gLegalCustom.length)">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="text-error no-margin fadein">
+
+                  </p>
+          </div>
+          <div class="clearfix clear format">
+            <p><strong>Zeilenumbruch: SHIFT+ENTER</strong><br />
+            <p>Der Preis-Beschreibungstext wird nach dem Gewinn im Preis-Detail Screen angezeigt.<br />
+            Format:<br />
+            Hier wird dem User vermittelt, welchen Preis er gewonnen hat, so wie auf Besonderheiten/Einschränkungen bei der Einlösung hingewiesen.<br />
+            z.B.: Gutschein nur auf eine Produktgruppe einlösbar, Mindestbestellwert
+            </p>
+          </div>
+        </div><br><br><br>
+        <div class="action-buttons">
+          <!-- todo: add counter reset -->
+          <div class="main-action-buttons">
+            <button type="button" class="btn btn-success btn-blue" (click)="addGoodie(totalGoodies)" href="javascript:void(0)" [disabled]="currentGoodie == 6 || !goodiesForm.form.valid">Preis hinzufügen</button>
+            <button type="button" class="btn btn-success btn-green" (click)="saveGoodiesDetails(goodiesForm.value);goAccountInfo(3000);" [disabled]="!goodiesForm.form.valid">Speichern und Weiter</button>
+          </div>
+
+          <div class="secondary-action-buttons text-right">
+            <button type="button" class="btn btn-text" (click)="saveGoodiesDetails(goodiesForm.value)" [disabled]="!goodiesForm.form.valid">Zwischenspeichern</button>&nbsp;|&nbsp;
+            <button type="button" class="btn btn-text" (click)="removeGoodie(currentGoodie)" [disabled]="currentGoodie == 0">Preis löschen</button>&nbsp;|&nbsp;
+            <button type="button" class="btn btn-text" (click)="resetGoodiesForm();">Alles löschen</button>
+          </div>
+          <br />
+          <br />
+        </div>
+      </form>
+
+    </div>
+    <!-- End of second col -->
+  </div>
+</div>

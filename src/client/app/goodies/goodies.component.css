@@ -1,0 +1,302 @@
+html {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+:host {
+  display: block;
+  padding: 0 16px;
+}
+
+input {
+  width: 250px;
+  border-width: 1px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 0 0 8px;
+}
+
+input[type="text"] {
+  width: 100%
+}
+input[type="radio"] {
+  display: none
+}
+
+.input-group-addon {
+  color: rgb(33, 37, 41);
+  font-weight: 800;
+  display: block;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  margin: 0.75em 0;
+  width: auto;
+  line-height: 1em
+}
+
+.input-group-addon.active {
+  background-color: #40a9ce;
+  color: #fff;
+  border-radius: 0.25rem;
+}
+
+.spacing-40 {
+    height: 40px
+}
+
+.no-margin {
+  margin: 0rem;
+}
+
+.margin-left-1 {
+  margin-left: .5rem;
+}
+
+.input-group-addon {
+  width: 100%
+}
+
+.nav-pills {
+  margin-top: 20px;
+  width: 100%;
+  display: -webkit-inline-box;
+}
+
+.progress {
+  display: flex;
+  height: 4px;
+  overflow: hidden; // force rounded corners by cropping it
+  font-size: 12px;
+  background-color: rgba(64,169,206,0.15);
+  border-radius: 0px
+}
+.progress-bar {
+  background-color: #40A9CE;
+}
+
+.scr_wrapper {
+  background: transparent url("assets/images/phone_frame.png") no-repeat center center;
+  vertical-align: middle;
+  display: list-item;
+  height: 634px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.formcontent {
+  margin-top: 650px
+}
+
+
+@media (max-width: 992px) {
+  .scr_wrapper {
+    position: absolute !important;
+  }
+  .formcontent {
+    margin-top: 0px
+  }
+}
+
+@media (min-width: 992px) {
+  .scr_wrapper {
+    position: fixed;
+  }
+  .formcontent {
+    margin-top: 0px
+  }
+}
+
+@media (max-width: 992px) {
+  .formcontent {
+    margin-top: 650px
+  }
+}
+
+@media (max-width: 500px) {
+  .goodiescreen {
+    display: none !important
+  }
+  .formcontent {
+    margin-top: auto;
+  }
+}
+
+/*
+@media (max-width: 1200px) {
+  .scr_wrapper {
+    position: absolute;
+  }
+}
+
+@media (min-width: 1200px) {
+  .scr_wrapper {
+    position: fixed;
+  }
+}
+ */
+.phone-preview {
+  vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
+  height: 500px;
+  margin: 64px auto 40px auto;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-left: 53px;
+  min-width: 443px
+}
+
+.phone-preview::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+	background-color: #F5F5F5;
+  border-radius: 1.75rem;
+}
+
+.phone-preview::-webkit-scrollbar
+{
+	width: 50px;
+	background-color: #F5F5F5;
+  padding-left: 400px;
+  border-radius: 1.75rem;
+}
+
+.phone-preview::-webkit-scrollbar-thumb
+{
+	background-color: #e6e6e6;
+  border-radius: 1.75rem;
+	background-image: -webkit-linear-gradient(45deg,
+	                                          rgba(255, 255, 255, .2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(255, 255, 255, .2) 50%,
+											  rgba(255, 255, 255, .2) 75%,
+											  transparent 75%,
+											  transparent);
+}
+/* IE */
+@supports (-ms-ime-align: auto) {
+  .phone-preview {
+        padding-left: 21px;
+  }
+  .phone-content {
+        overflow-y: auto !important;
+  }
+}
+/* Mozilla */
+@-moz-document url-prefix() {
+  .goodiescreen .phone-preview {
+        padding-left: 19px !important;
+  }
+  .phone-content {
+        overflow-y: auto !important;
+  }
+}
+
+
+.phone-content {
+  /*background: transparent url("assets/images/goodie_scrollable_scr.png")
+  no-repeat center center;*/
+  overflow-y: scroll;
+  overflow: hidden;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width:284px;
+  max-width:286px;
+  margin: 0px auto 0px auto;
+  padding-left: 0px;
+  padding-right: 0px;
+  /*background-color:gold;*/
+  word-wrap: break-word;
+}
+
+.active {
+  font-weight: bold
+}
+
+.action-buttons {
+  text-align: right;
+}
+
+.scr_header {
+  height: 360px;
+  display: block;
+  background: url("assets/images/goodie_scrollable_scr_sprite.png") 0 0;
+}
+
+.scr_validity {
+  height: 36px;
+  display: block;
+  background: url("assets/images/goodie_scrollable_scr_sprite.png") 0 -421px;
+}
+
+.scr_redeem {
+  height: 37px;
+  display: block;
+  background: url("assets/images/goodie_scrollable_scr_sprite.png") 0 -820px;
+}
+
+.scr_footer {
+  height: 95px;
+  display: block;
+  background: url(assets/images/goodie_scrollable_scr_sprite.png) 0 bottom;
+
+}
+
+#headLine {
+  /*background-color: rgba(244,112,109,0.5);*/
+  background: url("assets/images/goodie_scrollable_scr_y_repeat.png") repeat-y;
+  padding: 5px 19px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: left;
+  font-weight: bold;
+}
+#winDescr {
+  background: url("assets/images/goodie_scrollable_scr_y_repeat.png") repeat-y;
+  white-space: pre-line;
+  text-align: left;
+  font-size: 12px;
+  padding: 5px 19px;
+}
+#goodieType {
+  background-color: rgba(64,159,197,1);
+  white-space: pre-line;
+  text-align: left;
+  font-size: 12px;
+  color: #fff;
+  padding: 0px 19px 10px;
+}
+#goodieLegal {
+  background-color: rgba(84,181,143,1);
+  white-space: pre-line;
+  text-align: left;
+  font-size: 12px;
+  color: #fff;
+  padding: 0px 19px 10px;
+}
+.companyInfo {
+  background: url("assets/images/goodie_scrollable_scr_y_repeat.png") repeat-y;
+  text-align: left;
+  padding: 5px 19px;
+}
+.companyName {
+  font-weight: bold;
+  padding-top: 10px;
+  font-size: 15px;
+}
+.companyDescr {
+  font-size: 12px;
+  padding-top: 0
+}
+.dev {
+  color: blue;
+}
+
+p {
+  min-height: 22px
+}

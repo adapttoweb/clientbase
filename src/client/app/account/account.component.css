@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  padding: 0 16px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  margin-bottom: 0;
+  margin-top: 0.83em;
+}
+
+p {
+  min-height: 22px
+}
+
+input[type="text"] {
+  width: 100%
+}
+
+.action-buttons {
+  text-align: right;
+}
+
+.vertical_center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.web-seite {
+  background: url("assets/images/webtool_icons.png") 149px 72px;
+  background-clip: content-box;
+}
+
+.fb-seite {
+  background: url("assets/images/webtool_icons.png") 149px 1px;
+  background-clip: content-box;
+}
+
+.spp-email {
+  background: url("assets/images/webtool_icons.png") 9px 108px;
+  background-clip: content-box;
+}
+
+.spp-phone {
+  background: url("assets/images/webtool_icons.png") 9px 37px;
+  background-clip: content-box;
+}
+
+.input-group-addon {
+  padding: 1px 9px;
+  height: 40px;
+}
+
+.thankstext {
+  display: inline-grid;
+}

@@ -1,0 +1,150 @@
+<div class="container" [hidden]="isComplete">
+
+<form (ngSubmit)="saveAccountDetails( accountForm.value )" #accountForm="ngForm" (keydown.enter)="$event.preventDefault()">
+
+  <div class="row">
+    <div class="col-12 padding-top-100">
+      <h1 class="orange_bubble">Ansprechpartner</h1>
+      <p class="subheader">Bei wem dürfen wir uns bei weiteren Fragen melden?</p>
+    </div>
+  </div>
+  <div class="row lightgrey-bg">
+    <div class="col-sm-6 padding-top-25">
+      <label class="has-float-label">
+        <input type="text" class="form-control" name="companyName" #companyName="ngModel" placeholder="Company Name"
+                required [(ngModel)]="model.companyName" />
+        <span>Firmen-/Agenturname</span>
+      </label>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="companyName.valid || companyName.untouched">Unternehmensname ist ein Pflichtfeld.</small>
+      </p>
+    </div>
+
+    <div class="col-sm-6 padding-top-25">
+      <label class="has-float-label">
+        <input type="text" class="form-control" name="contactPerson" #contactPerson="ngModel" placeholder="z.B. Johan Strauss"
+                required [(ngModel)]="model.contactPerson" />
+        <span>Ansprechpartner</span>
+      </label>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="contactPerson.valid || contactPerson.untouched">Der Ansprechpartner ist ein Pflichtfeld.</small>
+      </p>
+    </div>
+
+    <div class="col-sm-6 padding-top-25">
+      <label class="has-float-label">
+        <input type="text" class="form-control" name="contactEmail" #contactEmail="ngModel" placeholder="z.B. ich@example.com"
+                required [(ngModel)]="model.contactEmail" />
+        <span>Kontakt E-mail</span>
+      </label>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="contactEmail.valid || contactEmail.untouched">Kontakt E-mail ist ein Pflichtfeld.</small>
+      </p>
+    </div>
+
+
+    <div class="col-sm-6 padding-top-25">
+      <label class="has-float-label">
+        <input type="text" class="form-control" name="contactPhone" #contactPhone="ngModel" placeholder="z.B. 0660 166 2 116"
+                required [(ngModel)]="model.contactPhone" />
+        <span>Kontakt-Telefon</span>
+      </label>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="contactPhone.valid || contactPhone.untouched">Kontakt-Telefon ist ein Pflichtfeld.</small>
+      </p>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-12 padding-top-100">
+      <h1 class="purple_bubble">Unternehmensinfo</h1>
+      <p class="subheader">Diese Daten sind in der App für unsere User sichtbar. (Angaben optional)</p>
+    </div>
+  </div>
+  <div class="row lightgrey-bg">
+    <div class="col-sm-6 padding-top-25">
+      <label class="has-float-label has-addon">
+        <div class="input-group-addon web-seite">&nbsp;
+        </div>
+        <input type="text" class="form-control has-addon" name="contactWebsite" #contactWebsite="ngModel" placeholder="z.B. www.beispiel.at"
+                 [(ngModel)]="model.contactWebsite" />
+        <span>Unternehmenswebseite</span>
+      </label>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="contactWebsite.valid || contactWebsite.untouched">Unternehmenswebseite ist ein Pflichtfeld.</small>
+      </p>
+    </div>
+
+    <div class="col-sm-6 padding-top-25">
+      <label class="has-float-label has-addon">
+        <div class="input-group-addon fb-seite">&nbsp;
+        </div>
+        <input type="text" class="form-control has-addon" name="facebookPage" #facebookPage="ngModel" placeholder="z.B. www.beispiel.at"
+                 [(ngModel)]="model.facebookPage" />
+        <span>Unternehmens Facebook-Seite</span>
+      </label>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="facebookPage.valid || facebookPage.untouched">Unternehmen Facebook-Seite ist ein Pflichtfeld.</small>
+      </p>
+    </div>
+
+    <div class="col-sm-6 padding-top-25">
+      <label class="has-float-label has-addon">
+        <div class="input-group-addon spp-email">&nbsp;
+        </div>
+        <input type="text" class="form-control has-addon" name="supportEmail" #supportEmail="ngModel" placeholder="z.B. www.beispiel.at"
+                 [(ngModel)]="model.supportEmail" />
+        <span>Support-E-Mail</span>
+      </label>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="supportEmail.valid || supportEmail.untouched">Support-E-Mail ist ein Pflichtfeld.</small>
+      </p>
+    </div>
+
+    <div class="col-sm-6 padding-top-25">
+      <label class="has-float-label has-addon">
+        <div class="input-group-addon spp-phone">&nbsp;
+        </div>
+        <input type="text" class="form-control has-addon" name="supportPhone" #supportPhone="ngModel" placeholder="z.B. 0660 122 3 221"
+                 [(ngModel)]="model.supportPhone" />
+        <span>Support-Telefon</span>
+      </label>
+      <p class="text-danger no-margin fadein text-error">
+        <small [hidden]="supportPhone.valid || supportPhone.untouched">Support-Telefon ist ein Pflichtfeld.</small>
+      </p>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+  </div>
+
+  <div class="action-buttons padding-top-100">
+    <!-- todo: add counter reset -->
+    <div class="main-action-buttons">
+      <button type="button" class="btn btn-success btn-green" (click)="saveAccountDetails(accountForm.value);completeOrder()" [disabled]="!accountForm.form.valid">Fertig!</button>
+    </div>
+
+<!-- accountForm.reset(); -->
+    <div class="secondary-action-buttons text-right">
+      <button type="button" class="btn btn-text" (click)="saveAccountDetails(accountForm.value)" [disabled]="!accountForm.form.valid">Zwischenspeichern</button>&nbsp;|&nbsp;
+      <button type="button" class="btn btn-text" (click)="resetAccountForm();">Zurücksetzen</button>
+    </div>
+    <br />
+    <br />
+  </div>
+</form>
+
+<!-- <span class="dev visible">
+{{diagnostic}}
+</span> -->
+</div>
+
+<div class="container" [hidden]="!isComplete">
+  <div class="row padding-top-100">
+    <div class="col-md-6 text-right"><img src="assets/images/thumbsup_250.png" class="" alt="Dankeschön!" />
+    </div>
+    <div class="col-md-6 thankstext vertical_center subheader">
+      <p><strong>Vielen Dank!</strong><br>Ihre Anfrage wird bearbeitet und wir werden uns umgehend bei Ihnen melden.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+:host {
+  display: block;
+  padding: 0 16px;
+}
+
+input {
+  width: 250px;
+  border-width: 1px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 0 0 8px;
+}
+
+input[type="text"] {
+  width: 100%
+}
+
+textarea[name="newUnternehmenstext"] {
+  width:100%
+}
+
+.phone-preview {
+  /*min-height: 700px;*/
+  background: transparent url("assets/images/phone_frame.png") no-repeat center center;
+  vertical-align: middle;
+  display: flex;
+  height: 636px;
+  margin: 2.5em 0 3em 0;
+}
+
+.phone-content {
+  width:284px;
+  max-width:284px;
+  height:500px;
+  margin: 64px auto 25px auto;
+  /*background-color:gold;*/
+  word-wrap: break-word;
+}
+
+/* Mozilla */
+@-moz-document url-prefix() {
+  .phone-preview {
+        padding-left: 0px !important;
+  }
+  .phone-content {
+        overflow-y: auto !important;
+  }
+}
+
+@media (max-width: 372px) {
+  .phone-preview {
+    display: none !important
+  }
+  .formcontent {
+    margin-top: auto;
+  }
+}
+
+.phone-content.campaign-headline {
+  background: transparent url("assets/images/screen1_channel.png") no-repeat center center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  padding-top: 279px;
+  text-align: left;
+  padding-right: 65px;
+  line-height: 18px;
+}
+
+.phone-content.company-info {
+  background: transparent url("assets/images/screen1_details_company_info.png") no-repeat center center;
+}
+
+.company-name {
+  margin: 60px 0px 0px 0px;
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  line-height: 20px;
+  font-size: 15px;
+}
+
+.company-text {
+  margin: 2px 0px 0px 0px;
+  text-align: justify;
+  display: block;
+  font-size: 12px;
+  line-height: 14px;
+  height: 188px;
+}
+
+.company-impressum {
+  margin: 80px 0px 0px 7px;
+  display: block;
+  text-align: left;
+  color: #fff;
+  font-size: 12px;
+  white-space: pre-line;
+  line-height: 14px
+}
+
+.action-buttons {
+  text-align: right;
+}
+
+p {
+  min-height: 22px
+}
